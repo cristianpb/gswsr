@@ -1,4 +1,45 @@
-<h1 class="title">
-  Welcome to {{ title }}!
-</h1>
-<router-outlet></router-outlet>
+<nav class="navbar is-primary">
+  <div class="navbar-brand">
+    <div class="navbar-item" href="https://global-sustainable-revolution.com/">
+      <a href="/">
+        <img src="/assets/images/GSWSR-beaker.png" alt="GSWSR">
+      </a>
+    </div>
+
+    <div class="navbar-burger burger" [ngClass]="{ 'is-active' : burger }" (click)="toggleBurger()" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navbarExampleTransparentExample" class="navbar-menu" [ngClass]="{ 'is-active' : burger }" (click)="toggleBurger()">
+    <div class="navbar-start">
+      <a class="navbar-item" href="https://global-sustainable-revolution.com/">
+        Global Startup Weekend Sustainable Revolution
+      </a>
+    </div>
+
+    <div class="navbar-end">
+
+      <a class="navbar-item" href="https://global-sustainable-revolution.com/#about">
+        About
+      </a>
+
+      <a class="navbar-item" href="https://global-sustainable-revolution.com/#local-editions">
+        Participate!
+      </a>
+
+      <a class="navbar-item" href="https://global-sustainable-revolution.com/#contact">
+        Contact
+      </a>
+
+    </div>
+  </div>
+</nav>
+
+<section class="section">
+  <div class="container">
+      <router-outlet></router-outlet>
+  </div>
+</section>

@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'gswsr';
+  title = 'Global Startup Weekend Sustainable Revolution';
+  burger: boolean = false;
+
+  toggleBurger() {
+    this.burger = !this.burger;
+  }
 }
