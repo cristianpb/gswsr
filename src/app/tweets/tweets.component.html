@@ -1,3 +1,9 @@
-<p>
-  tweets works!
-</p>
+<div class="columns tweets is-multiline">
+  <div class="column card is-one-third" *ngFor="let tweet of tweets; let i = index">
+    {{ tweet.screenname }}
+<!--
+    <app-tweet *ngIf="tweet.retweeted_status" [tweet]="tweet.retweeted_status" [retweet]="tweet" (action)="action($event, i)"></app-tweet>
+    <app-tweet *ngIf="!tweet.retweeted_status" [tweet]="tweet" (action)="action($event, i)"></app-tweet>
+-->
+  </div>
+</div>
