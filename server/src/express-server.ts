@@ -50,10 +50,7 @@ export class ExpressServer {
     this.app.get('/', (req, res) => {
       res.sendFile(path.join(__dirname, '../../dist/index.html'));
     });
-    this.app.get('/dashboard', (req, res) => {
-      res.sendFile(path.join(__dirname, '../../dist/index.html'));
-    });
-    this.app.get('/news', (req, res) => {
+    this.app.get('/tweets', (req, res) => {
       res.sendFile(path.join(__dirname, '../../dist/index.html'));
     });
   }

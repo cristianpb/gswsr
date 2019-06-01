@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server/dist/server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -11,10 +11,13 @@
     "build-ts": "./node_modules/.bin/tsc -p server",
     "watch-ts": "./node_modules/.bin/tsc -p server -w",
     "watch-node": "nodemon server/dist/server.js",
-    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\""
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "postinstall": "ng build --aot --prod --output-path dist && ./node_modules/.bin/tsc -p server"
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "~7.3.8",
+    "@angular/compiler-cli": "~7.2.0",
     "@angular/animations": "~7.2.0",
     "@angular/common": "~7.2.0",
     "@angular/compiler": "~7.2.0",
@@ -45,8 +48,6 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
-    "@angular/cli": "~7.3.8",
-    "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
     "@types/node": "~8.9.4",
     "@types/jasmine": "~2.8.8",

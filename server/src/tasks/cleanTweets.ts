@@ -5,7 +5,7 @@ import { environment } from '../environment';
   const connection = await MongoClient.connect(environment.mongourl, { useNewUrlParser: true });
   const db = connection.db(environment.mongoDatabase);
   const collections = await db.collections();
-  const collectionsName = await collections.map(item => item.s.name);
+  const collectionsName = await collections.map((item: any) => item.s.name);
   console.log('collections', collectionsName);
   if (collectionsName.indexOf('tweets') > -1) {
     console.log('Deleting existing tweets');
