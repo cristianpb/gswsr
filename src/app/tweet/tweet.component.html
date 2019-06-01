@@ -24,17 +24,16 @@
       <p [innerHTML]="tweet | cleanTweet"></p>
       <!--
       <time datetime="{{ '01/05/2017' | amParse:'DD/MM/YYYY' | amDateFormat:'YYYY-MM-DD' }}">{{ tweet.created_at |  amTimeAgo}}</time>
+      -->
       <div class="tags has-addons">
         <span class="tag">{{ tweet.date | amParse: 'ddd MMM DD HH:mm:ss ZZ YYYY' | amTimeAgo }}</span>
         <span class="tag"  *ngIf="hasRetweet(tweet)">
-          <fa-icon [icon]="faRetweet"></fa-icon>   {{ tweet.retweet_count }}
+           {{ tweet.retweet_count }}
         </span>
         <span class="tag" *ngIf="hasFavorite(tweet)">
-          <fa-icon [icon]="faThumbsUp"></fa-icon>   {{ tweet.favorite_count }} 
+          {{ tweet.favorite_count }} 
         </span>
       </div>
-      -->
-            
     </div>
   </div>
 </div>
@@ -84,9 +83,7 @@
         </div>
         <footer class="card-footer">
           <p class="card-footer-item">
-            <!--
             <time datetime="2016-1-1">{{ tweet.date |  amTimeAgo}}</time>
-            -->
           </p>
 
           <p class="card-footer-item" *ngIf="hasFavorite(tweet)">
