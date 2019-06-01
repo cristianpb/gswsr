@@ -5,11 +5,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TweetsComponent } from './tweets/tweets.component';
+import { TweetComponent } from './tweet/tweet.component';
+import { CleanTweetPipe } from './clean-tweet.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TweetsComponent
+    TweetsComponent,
+    TweetComponent,
+    CleanTweetPipe
   ],
   imports: [
     BrowserModule,
