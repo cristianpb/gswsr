@@ -1,8 +1,9 @@
 import { createServer, Server } from 'http';
 import { Request, Response } from 'express';
+import { MongoClient } from 'mongodb';
 import express from 'express';
 import path from 'path';
-//import { environment } from './environment';
+import { environment } from './environment';
 
 export class ExpressServer {
   public static readonly PORT: number = 3001;
@@ -15,6 +16,7 @@ export class ExpressServer {
     this.createApp();
     this.config();
     this.createServer();
+    this.mongoConnect();
     //this.static_content();
     this.routes();
     this.listen();
@@ -32,6 +34,14 @@ export class ExpressServer {
     this.server = createServer(this.app);
   }
 
+  private mongoConnect(): void {
+    console.log('Connected');
+    MongoClient.connect(environment.mongourl).then(
+      connection => {
+      this.db = connection.db(environment.mongoDatabase);
+      }
+    );
+  }
 
   private static_content(): void {
     this.app.use(require('cors')());
@@ -50,8 +60,15 @@ export class ExpressServer {
 
   private routes(): void {
     this.app.get('/', (req: Request, res: Response) => {
-        res.json({'data': 'hello world'});
+        res.json({data: 'hello world'});
     });
+
+    this.app.get('/api/tweets/:page', (req: Request, res: Response) => {
+      this.getTweets(Number(req.params.page), 0).then(( tweets ) => {
+        res.json({data: tweets});
+      });
+    });
+
   }
 
 
@@ -64,4 +81,15 @@ export class ExpressServer {
   public getApp(): express.Application {
     return this.app;
   }
+
+  private async getTweets(page: number, skip: number) {
+    const start = (page * 9) + (skip * 1);
+    const docs = await this.db.collection('tweets')
+      .find({}, {skip: start})
+      .sort({twid: -1})
+      .limit(9)
+      .toArray();
+    return docs;
+  }
+
 }
