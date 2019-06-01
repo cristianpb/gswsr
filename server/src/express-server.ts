@@ -66,6 +66,12 @@ export class ExpressServer {
       });
     });
 
+    this.app.get('/api/postInsta/:page', (req: Request, res: Response) => {
+      this.getPostInsta(Number(req.params.page), 0).then(( posts ) => {
+        res.json({data: posts});
+      });
+    });
+
   }
 
 
@@ -82,6 +88,16 @@ export class ExpressServer {
   private async getTweets(page: number, skip: number) {
     const start = (page * 9) + (skip * 1);
     const docs = await this.db.collection('tweets')
+      .find({}, {skip: start})
+      .sort({twid: -1})
+      .limit(9)
+      .toArray();
+    return docs;
+  }
+
+  private async getPostInsta(page: number, skip: number) {
+    const start = (page * 9) + (skip * 1);
+    const docs = await this.db.collection('postInsta')
       .find({}, {skip: start})
       .sort({twid: -1})
       .limit(9)
