@@ -19,7 +19,7 @@ const T = new Twit({
   // connecting at mongoClient
   const connection = await MongoClient.connect(environment.mongourl, { useNewUrlParser: true });
 
-  const db = await connection.db('gswsr');
+  const db = await connection.db(environment.mongoDatabase);
   console.log('Connected');
 
   const result = await ProcessTweet.searchTweets(db, T, 'gswsr');

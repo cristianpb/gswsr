@@ -13,7 +13,7 @@ export class ProcessTweet {
       if (isBan) {
         return red(`Banned ${tweet.body}`);
       } else {
-        // await ProcessTweet.saveMetadata(db, tweet);
+        await ProcessTweet.saveMetadata(db, tweet);
         const resInsert = await db.collection('tweets').insertOne(tweet);
         return green(`Saved ${tweet.screenname} ${resInsert.result.ok}`);
       }
@@ -38,6 +38,60 @@ export class ProcessTweet {
       return false;
     } else {
       return true;
+    }
+  }
+
+  static saveMetadata = async (db: Db, tweet: Tweet) => {
+    const msg3 = ProcessTweet.saveHashtag(db, tweet, /#(\w*[0-9a-zA-Z]+\w*[0-9a-zA-Z])/gm, 'hashtag');
+    const msg4 = ProcessTweet.saveHashtag(db, tweet, /@(\w*[0-9a-zA-Z]+\w*[0-9a-zA-Z])/gm, 'mention');
+  }
+
+  static saveHashtag = async (db: Db, tweet: Tweet, reg: RegExp, annotationType: string) => {
+    const hashtags = await tweet.body.match(reg);
+    const updateVal: SetTags = await {};
+    if (annotationType === 'mention') {
+      updateVal.mentions = hashtags;
+    }
+    if (annotationType === 'hashtag') {
+      updateVal.hashtags = hashtags;
+    }
+    if (hashtags) {
+      console.log('Text: ', tweet.body, '\n', annotationType, ': ', hashtags);
+      if (hashtags.length > 0) {
+        try {
+          await db.collection('tweets').findOneAndUpdate(
+            {twid: tweet.twid},
+            { $set: updateVal}
+          );
+          console.log(`updated tweet ${tweet.twid}`);
+          hashtags.forEach(tag => ProcessTweet.processHashtag(db, tag, hashtags, annotationType));
+        } catch (err) {
+          console.log('Tweet update error', err);
+        }
+      }
+    } else {
+      console.log(yellow(`Text: ${tweet.body} \nNo ${annotationType}`));
+    }
+  }
+
+  static processHashtag = async (db: Db, tag: string, hashtags: RegExpMatchArray, annotationType: string) => {
+    const normTag = await tag.toLowerCase();
+    const docs = await db.collection('hashtags')
+      .find({label: normTag , type: annotationType})
+      .toArray();
+    if ( docs.length === 0 ) {
+      const res1 = db.collection('hashtags').insertOne({type: annotationType, label: normTag, value: 1});
+      console.log('Creating tag: ', normTag);
+    } else {
+      try {
+        await db.collection('hashtags').findOneAndUpdate(
+          { label: normTag, type: annotationType },
+          { $inc: { value : 1 }}
+        );
+        console.log('updated hashtag: ', normTag);
+      } catch (err) {
+        console.log('Hash update error', err);
+      }
     }
   }
 
