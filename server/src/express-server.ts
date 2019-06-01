@@ -17,7 +17,7 @@ export class ExpressServer {
     this.config();
     this.createServer();
     this.mongoConnect();
-    //this.static_content();
+    this.static_content();
     this.routes();
     this.listen();
   }
@@ -36,7 +36,7 @@ export class ExpressServer {
 
   private mongoConnect(): void {
     console.log('Connected');
-    MongoClient.connect(environment.mongourl).then(
+    MongoClient.connect(environment.mongourl, { useNewUrlParser: true }).then(
       connection => {
       this.db = connection.db(environment.mongoDatabase);
       }
