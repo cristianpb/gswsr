@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Tweet } from '../tweet';
 
 @Component({
@@ -7,6 +7,7 @@ import { Tweet } from '../tweet';
   styleUrls: ['./tweet.component.scss']
 })
 export class TweetComponent implements OnInit {
+  media: boolean = false;
   @Input() tweet: Tweet;
 
   constructor() { }
