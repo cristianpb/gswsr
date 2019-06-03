@@ -14,14 +14,14 @@ export class ProcessTweet {
         return red(`Banned ${tweet.body}`);
       } else {
         await ProcessTweet.saveMetadata(db, tweet);
-        const resInsert = await db.collection('tweets').insertOne(tweet);
+        const resInsert = await db.collection('documents').insertOne(tweet);
         return green(`Saved ${tweet.screenname} ${resInsert.result.ok}`);
       }
     } catch (err) {
       if (err.code === 11000) {
         delete tweet._id;
-        const result: any = await db.collection('tweets').findOneAndUpdate(
-          {twid: tweet.twid},
+        const result: any = await db.collection('documents').findOneAndUpdate(
+          {id: tweet.id},
           {$set: tweet}
         );
         return blue(`Updated ${tweet.screenname} ${result.ok}`);
@@ -59,11 +59,11 @@ export class ProcessTweet {
       console.log('Text: ', tweet.body, '\n', annotationType, ': ', hashtags);
       if (hashtags.length > 0) {
         try {
-          await db.collection('tweets').findOneAndUpdate(
-            {twid: tweet.twid},
+          await db.collection('documents').findOneAndUpdate(
+            {id: tweet.id},
             { $set: updateVal}
           );
-          console.log(`updated tweet ${tweet.twid}`);
+          console.log(`updated tweet ${tweet.id}`);
           hashtags.forEach(tag => ProcessTweet.processHashtag(db, tag, hashtags, annotationType));
         } catch (err) {
           console.log('Tweet update error', err);

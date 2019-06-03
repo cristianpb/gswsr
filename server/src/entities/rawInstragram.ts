@@ -4,7 +4,7 @@ export class rawInstagram {
   id:	string;
   edge_media_to_caption:	any;
   shortcode:	string;
-  edge_media_to_comment	any;
+  edge_media_to_comment:	any;
   taken_at_timestamp: number;
   dimensions: any;
   display_url: string;
@@ -15,4 +15,5 @@ export class rawInstagram {
   thumbnail_resources: any;
   is_video:	boolean;
   accessibility_caption: string;
-}
+  video_view_count?: number;
+};

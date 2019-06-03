@@ -16,7 +16,11 @@ export class TwitterService {
 
   fetchTweets(page: number) {
     const url = `${environment.api}/api/tweets/${page}`;
-    console.log(url);
     return this.http.get<TwitterResponse>(url);
+  }
+
+  fetchDocuments(page: number) {
+    const url = `${environment.api}/api/documents/${page}`;
+    return this.http.get(url);
   }
 }

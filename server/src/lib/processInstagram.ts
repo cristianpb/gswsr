@@ -7,15 +7,14 @@ import axios from 'axios';
 
 export class ProcessInstagram {
   static savePosts = async (db: Db, data: rawInstagram) => {
-    const post = await new postInsta(data.node);
-
+    const post = await new postInsta(data);
     try {
-      const restInsert = await db.collection('postInsta').insertOne(post);
+      const restInsert = await db.collection('documents').insertOne(post);
       return green(`Saved ${post.id} ${restInsert.result.ok}`);
     } catch (err) {
       if (err.code === 11000) {
         delete post.id;
-        const result: any = await db.collection('postInsta').findOneAndUpdate(
+        const result: any = await db.collection('documents').findOneAndUpdate(
           {id: post.id},
           {$set: post}
         );
@@ -34,8 +33,8 @@ export class ProcessInstagram {
       return 'Zero instagram posts found';
     } else {
       console.log(`Total posts ${edges.length}`);
-      edges.forEach(async (data: rawInstagram) => {
-        const msg = await ProcessInstagram.savePosts(db, data);
+      edges.forEach(async (data: any) => {
+        const msg = await ProcessInstagram.savePosts(db, data.node);
         console.log(msg);
       });
     }

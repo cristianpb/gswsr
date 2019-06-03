@@ -3,7 +3,7 @@ import moment from 'moment';
 
 export class Tweet {
   _id: string;
-  twid: string;
+  id: string;
   author: string;
   screenname: string;
   media: {
@@ -35,8 +35,10 @@ export class Tweet {
   reply_count: number;
   retweet_count: number;
   favorite_count: number;
+  social_media: string;
   constructor(data: rawTweet) {
-    this.twid = data.id_str;
+    this.social_media = 'twitter';
+    this.id = data.id_str;
     this.author = data.user.name;
     this.screenname = data.user.screen_name;
     this.avatar = data.user.profile_image_url_https;

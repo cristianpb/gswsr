@@ -5,16 +5,20 @@ import { MomentModule } from 'ngx-moment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TweetsComponent } from './tweets/tweets.component';
 import { TweetComponent } from './tweet/tweet.component';
 import { CleanTweetPipe } from './clean-tweet.pipe';
+import { PostInstaComponent } from './post-insta/post-insta.component';
+import { DocumentsComponent } from './documents/documents.component';
+import { CleanInstaPipe } from './clean-insta.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TweetsComponent,
     TweetComponent,
-    CleanTweetPipe
+    CleanTweetPipe,
+    PostInstaComponent,
+    DocumentsComponent,
+    CleanInstaPipe
   ],
   imports: [
     BrowserModule,

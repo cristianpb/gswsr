@@ -72,6 +72,13 @@ export class ExpressServer {
       });
     });
 
+    this.app.get('/api/documents/:page', (req: Request, res: Response) => {
+      this.getDocuments(Number(req.params.page), 0).then(( posts ) => {
+        res.json({data: posts});
+      });
+    });
+
+
   }
 
 
@@ -87,9 +94,9 @@ export class ExpressServer {
 
   private async getTweets(page: number, skip: number) {
     const start = (page * 9) + (skip * 1);
-    const docs = await this.db.collection('tweets')
-      .find({}, {skip: start})
-      .sort({twid: -1})
+    const docs = await this.db.collection('documents')
+      .find({social_media:'twitter'}, {skip: start})
+      .sort({timestamp_ms: -1})
       .limit(9)
       .toArray();
     return docs;
@@ -97,12 +104,23 @@ export class ExpressServer {
 
   private async getPostInsta(page: number, skip: number) {
     const start = (page * 9) + (skip * 1);
-    const docs = await this.db.collection('postInsta')
-      .find({}, {skip: start})
-      .sort({twid: -1})
+    const docs = await this.db.collection('documents')
+      .find({social_media: 'instagram'}, {skip: start})
+      .sort({timestamp_ms: -1})
       .limit(9)
       .toArray();
     return docs;
   }
+
+  private async getDocuments(page: number, skip: number) {
+    const start = (page * 9) + (skip * 1);
+    const docs = await this.db.collection('documents')
+      .find({}, {skip: start})
+      .sort({timestamp_ms: -1})
+      .limit(9)
+      .toArray();
+    return docs;
+  }
+
 
 }
