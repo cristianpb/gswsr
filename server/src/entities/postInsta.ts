@@ -3,6 +3,7 @@ import moment from 'moment';
 
 export class postInsta {
   id: string;
+  _id: string;
   author: string;
   body: string;
   media: string;

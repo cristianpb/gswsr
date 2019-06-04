@@ -58,7 +58,7 @@ export class ProcessFacebook {
       client_secret: process.env.FACEBOOK_CLIENT_SECRET,
       grant_type: 'fb_exchange_token',
       fb_exchange_token: this.token
-    }, function (res) {
+    }, function (res: any) {
       if(!res || res.error) {
         console.log(!res ? 'error occurred' : res.error);
         return;

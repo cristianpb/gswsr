@@ -2,9 +2,11 @@ import { rawFacebook } from './rawFacebook';
 import moment from 'moment';
 
 export class postFacebook {
+  _id: string;
   created_time: string;
   story: string;
   id: string;
+  author: string;
   body: string;
   date: string;
   timestamp_ms: number;
