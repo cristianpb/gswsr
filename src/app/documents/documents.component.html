@@ -2,6 +2,7 @@
   <div class="column card is-one-third" *ngFor="let document of documents; let i = index">
     <app-tweet *ngIf="document.social_media === 'twitter'" [tweet]="document"></app-tweet>
     <app-post-insta *ngIf="document.social_media === 'instagram'" [postInsta]="document"></app-post-insta>
+    <app-post-facebook *ngIf="document.social_media === 'facebook'" [postFacebook]="document" ></app-post-facebook>
   </div>
 </div>
 

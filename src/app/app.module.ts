@@ -10,6 +10,8 @@ import { CleanTweetPipe } from './clean-tweet.pipe';
 import { PostInstaComponent } from './post-insta/post-insta.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { CleanInstaPipe } from './clean-insta.pipe';
+import { PostFacebookComponent } from './post-facebook/post-facebook.component';
+import { CleanFacebookPipe } from './clean-facebook.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { CleanInstaPipe } from './clean-insta.pipe';
     CleanTweetPipe,
     PostInstaComponent,
     DocumentsComponent,
-    CleanInstaPipe
+    CleanInstaPipe,
+    PostFacebookComponent,
+    CleanFacebookPipe
   ],
   imports: [
     BrowserModule,

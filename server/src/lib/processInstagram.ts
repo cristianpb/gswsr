@@ -13,9 +13,11 @@ export class ProcessInstagram {
       return green(`Saved ${post.id} ${restInsert.result.ok}`);
     } catch (err) {
       if (err.code === 11000) {
+        const { id } = post
         delete post.id;
+        delete post._id;
         const result: any = await db.collection('documents').findOneAndUpdate(
-          {id: post.id},
+          {id: id},
           {$set: post}
         );
         return blue(`Updated ${post.author} ${result.ok}`);

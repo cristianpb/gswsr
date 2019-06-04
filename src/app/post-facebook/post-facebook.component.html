@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card-image" *ngIf="hasPhoto(postFacebook)">
+    <figure class="image is-4by3">
+      <img [src]="postFacebook.media" (click)="toggleModal()" />
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="content">
+      <p [innerHTML]="postFacebook | cleanFacebook"></p>
+      <div class="tags has-addons">
+        <span class="tag">{{ postFacebook.date | amParse: 'ddd MMM DD HH:mm:ss ZZ YYYY' | amTimeAgo }}</span>
+        <span class="tag" *ngIf="hasShares(postFacebook)">
+          {{ postFacebook.shares }} 
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal" [ngClass]="{ 'is-active' : media }">
+  <div class="modal-background" (click)="toggleModal()"></div>
+  <div class="modal-card">
+    <section class="modal-card-body">
+      <div class="card">
+        <div class="card-content">
+          <div class="content">
+            <p [innerHTML]="postFacebook | cleanFacebook"></p>
+          </div>
+        </div>
+        <div class="card-image" *ngIf="hasPhoto(postFacebook)">
+          <figure class="image">
+            <img [src]="postFacebook.media" (click)="toggleModal()" />
+          </figure>
+        </div>
+        <footer class="card-footer">
+          <p class="card-footer-item">
+            <time>{{ postFacebook.date |  amTimeAgo}}</time>
+          </p>
+
+          <p class="card-footer-item" *ngIf="hasShares(postFacebook)">
+             {{ postFacebook.shares }} 
+          </p>
+
+        </footer>
+      </div>
+    </section>
+  </div>
+</div>
+
