@@ -50,16 +50,12 @@ export class ExpressServer {
     this.app.get('/', (req, res) => {
       res.sendFile(path.join(__dirname, '../../dist/index.html'));
     });
-    this.app.get('/tweets', (req, res) => {
+    this.app.get('/documents', (req, res) => {
       res.sendFile(path.join(__dirname, '../../dist/index.html'));
     });
   }
 
   private routes(): void {
-    this.app.get('/', (req: Request, res: Response) => {
-        res.json({data: 'hello world'});
-    });
-
     this.app.get('/api/tweets/:page', (req: Request, res: Response) => {
       this.getTweets(Number(req.params.page), 0).then(( tweets ) => {
         res.json({data: tweets});
