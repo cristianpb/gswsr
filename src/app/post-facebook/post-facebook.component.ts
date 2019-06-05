@@ -33,4 +33,12 @@ export class PostFacebookComponent implements OnInit {
     return false;
   }
 
+  hasCommentsCount(postFacebook) {
+    if (postFacebook.comments_count > 0) {
+        return true;
+    }
+    return false;
+  }
+
+
 }

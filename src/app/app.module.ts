@@ -12,6 +12,7 @@ import { DocumentsComponent } from './documents/documents.component';
 import { CleanInstaPipe } from './clean-insta.pipe';
 import { PostFacebookComponent } from './post-facebook/post-facebook.component';
 import { CleanFacebookPipe } from './clean-facebook.pipe';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CleanFacebookPipe } from './clean-facebook.pipe';
     BrowserModule,
     HttpClientModule,
     MomentModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

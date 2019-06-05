@@ -26,12 +26,15 @@
       <time datetime="{{ '01/05/2017' | amParse:'DD/MM/YYYY' | amDateFormat:'YYYY-MM-DD' }}">{{ tweet.created_at |  amTimeAgo}}</time>
       -->
       <div class="tags has-addons">
+        <span class="tag">
+          <fa name="twitter"></fa>
+        </span>
         <span class="tag">{{ tweet.date | amParse: 'ddd MMM DD HH:mm:ss ZZ YYYY' | amTimeAgo }}</span>
         <span class="tag"  *ngIf="hasRetweet(tweet)">
-           {{ tweet.retweet_count }}
+           {{ tweet.retweet_count }} &nbsp; <fa name="retweet"></fa>
         </span>
         <span class="tag" *ngIf="hasFavorite(tweet)">
-          {{ tweet.favorite_count }} 
+          {{ tweet.favorite_count }} &nbsp; <fa name="heart"></fa>
         </span>
       </div>
     </div>
@@ -87,11 +90,11 @@
           </p>
 
           <p class="card-footer-item" *ngIf="hasFavorite(tweet)">
-             {{ tweet.favorite_count }} 
+             {{ tweet.favorite_count }} &nbsp; <fa name="heart"></fa>
           </p>
 
           <p class="card-footer-item" *ngIf="hasRetweet(tweet)">
-            {{ tweet.retweet_count }}
+            {{ tweet.retweet_count }} &nbsp; <fa name="retweet"></fa>
           </p>
 
           <p class="card-footer-item">

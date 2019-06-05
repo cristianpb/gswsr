@@ -8,9 +8,12 @@
     <div class="content">
       <p [innerHTML]="postInsta | cleanInsta"></p>
       <div class="tags has-addons">
+        <span class="tag">
+          <fa name="instagram"></fa>
+        </span>
         <span class="tag">{{ postInsta.date | amParse: 'ddd MMM DD HH:mm:ss ZZ YYYY' | amTimeAgo }}</span>
         <span class="tag" *ngIf="hasFavorite(postInsta)">
-          {{ postInsta.favorite_count }} 
+          {{ postInsta.favorite_count }} &nbsp; <fa name="heart"></fa>
         </span>
       </div>
     </div>
@@ -22,6 +25,15 @@
 <div class="modal" [ngClass]="{ 'is-active' : media }">
   <div class="modal-background" (click)="toggleModal()"></div>
   <div class="modal-card">
+    <header class="modal-card-head">
+      <div class="container">
+          <div class="media">
+            <div class="media-right">
+              <button class="delete" aria-label="close" (click)="toggleModal()"></button>
+            </div>
+          </div>
+      </div>
+    </header>
     <section class="modal-card-body">
       <div class="card">
         <div class="card-content">
@@ -36,11 +48,14 @@
         </div>
         <footer class="card-footer">
           <p class="card-footer-item">
+            <fa name="instagram"></fa>
+          </p>
+          <p class="card-footer-item">
             <time>{{ postInsta.date |  amTimeAgo}}</time>
           </p>
 
           <p class="card-footer-item" *ngIf="hasFavorite(postInsta)">
-             {{ postInsta.favorite_count }} 
+             {{ postInsta.favorite_count }} &nbsp; <fa name="heart"></fa>
           </p>
 
         </footer>

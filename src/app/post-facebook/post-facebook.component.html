@@ -8,9 +8,15 @@
     <div class="content">
       <p [innerHTML]="postFacebook | cleanFacebook"></p>
       <div class="tags has-addons">
+        <span class="tag">
+          <fa name="facebook"></fa>
+        </span>
         <span class="tag">{{ postFacebook.date | amParse: 'ddd MMM DD HH:mm:ss ZZ YYYY' | amTimeAgo }}</span>
         <span class="tag" *ngIf="hasShares(postFacebook)">
-          {{ postFacebook.shares }} 
+          {{ postFacebook.shares }} &nbsp; <fa name="share"></fa>
+        </span>
+        <span class="tag" *ngIf="hasCommentsCount(postFacebook)">
+          {{ postFacebook.comments_count }} &nbsp; <fa name="comments"></fa>
         </span>
       </div>
     </div>
@@ -22,6 +28,15 @@
 <div class="modal" [ngClass]="{ 'is-active' : media }">
   <div class="modal-background" (click)="toggleModal()"></div>
   <div class="modal-card">
+    <header class="modal-card-head">
+      <div class="container">
+          <div class="media">
+            <div class="media-right">
+              <button class="delete" aria-label="close" (click)="toggleModal()"></button>
+            </div>
+          </div>
+      </div>
+    </header>
     <section class="modal-card-body">
       <div class="card">
         <div class="card-content">
@@ -36,11 +51,17 @@
         </div>
         <footer class="card-footer">
           <p class="card-footer-item">
+            <fa name="facebook"></fa>
+          </p>
+          <p class="card-footer-item">
             <time>{{ postFacebook.date |  amTimeAgo}}</time>
           </p>
 
           <p class="card-footer-item" *ngIf="hasShares(postFacebook)">
-             {{ postFacebook.shares }} 
+             {{ postFacebook.shares }} &nbsp; <fa name="share"></fa>
+          </p>
+          <p class="card-footer-item" *ngIf="hasCommentsCount(postFacebook)">
+             {{ postFacebook.comments_count }} &nbsp; <fa name="comments"></fa>
           </p>
 
         </footer>
