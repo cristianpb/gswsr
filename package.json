@@ -42,7 +42,7 @@
     "express": "^4.17.1",
     "fb": "^2.0.0",
     "font-awesome": "^4.7.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mongodb": "^3.2.6",
     "ngx-moment": "^3.4.0",
     "nodemon": "^1.19.1",
